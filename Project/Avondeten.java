@@ -28,4 +28,5 @@ public class Avondeten extends Eetmoment {
     public void voegBereiderToe(String Bereider) {
         setbereider(bereider);
     }
+
 }

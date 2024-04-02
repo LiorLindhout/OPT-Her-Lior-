@@ -22,7 +22,7 @@ public class Ontbijt extends Eetmoment {
 
     @Override
     public List<Gerecht> getGerechten() {
-        return gerechten; // Implementatie specifiek voor Ontbijt
+        return gerechten;
     }
 
     public Gerecht getLaatstToegevoegdGerecht() {

@@ -1,5 +1,6 @@
 package Project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gerecht {
@@ -8,6 +9,7 @@ public class Gerecht {
 
     public Gerecht(String naam) {
         this.naam = naam;
+        this.ingredienten = new ArrayList<>();
     }
 
     public String getNaam() {

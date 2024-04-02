@@ -1,6 +1,5 @@
 package Project;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -124,8 +123,11 @@ public class Main {
     }
 
     public static void voegEetmomentToeAanDag(Dag dag) {
-        System.out.println("Aan welk eetmoment wilt u een gerecht toevoegen?");
-        System.out.println("Typ 'Ont' voor Ontbijt, typ 'Lun' voor Lunch, typ 'Avo' voor Avondeten:");
+        System.out.println("=========================================");
+        System.out.println("Aan welk eetmoment wilt u een gerecht ");
+        System.out.println("toevoegen ?");
+        System.out.println("Typ 'Ont' voor Ontbijt, typ 'Lun' voor ");
+        System.out.println("Lunch, typ 'Avo' voor Avondeten:");
         String eetmomentNaam = scanner.nextLine().toLowerCase();
 
         Eetmoment eetmoment = null;
@@ -156,36 +158,43 @@ public class Main {
         }
 
         if (eetmoment instanceof Avondeten) {
+            System.out.println("=========================================");
             System.out.println("Voer de naam van het gerecht in:");
             String gerechtNaam = scanner.nextLine();
+            System.out.println("=========================================");
             System.out.println("Voer de ingrediënten in voor het gerecht: " + gerechtNaam);
-            List<Ingredient> ingredienten = new ArrayList<>();
             boolean doorgaan = true;
 
+            System.out.println("=========================================");
+            System.out.println("Voer de naam van de Berijder in:");
+            String Berijder = scanner.nextLine();
+
+            ((Avondeten) eetmoment).voegGerechtToe(gerechtNaam);
+            ((Avondeten) eetmoment).voegBereiderToe(Berijder);
+
             while (doorgaan) {
-                System.out.println("Voer de naam van een ingrediënt in (of typ stop):");
+                System.out.println("=========================================");
+                System.out.println("Voer de naam van een ingrediënt in ");
+                System.out.println("of typ stop");
                 String ingredientNaam = scanner.nextLine();
                 if (ingredientNaam.equalsIgnoreCase("stop")) {
                     doorgaan = false;
                 } else {
-                    System.out.println("Welke meetwaarde heeft dit Ingredient (Liter , Gram)");
+                    System.out.println("=========================================");
+                    System.out.println("Welke meetwaarde heeft dit Ingredient");
+                    System.out.println("(Liter , Gram)");
                     String meetwaarde = scanner.nextLine();
-                    System.out.println(
-                            "Wat is de hoeveelheid die u nodig heeft van dit Ingredient. In de eerder aangegeven meetwaarde. ");
+                    System.out.println("=========================================");
+                    System.out.println("Wat is de hoeveelheid die u nodig heeft ");
+                    System.out.println("van dit Ingredient. In de eerder ");
+                    System.out.println("aangegeven meetwaarde. ");
                     int hoeveelheid = scanner.nextInt();
                     scanner.nextLine();
 
-                    Ingredient ingredient = new Ingredient(ingredientNaam, hoeveelheid, meetwaarde);
-                    ingredienten.add(ingredient);
+                    Gerecht gerecht = ((Avondeten) eetmoment).getLaatstToegevoegdGerecht();
+                    gerecht.voegIngredientToe(ingredientNaam, hoeveelheid, meetwaarde);
                 }
             }
-            System.out.println("Voer de naam van de Berijder in:");
-            String Berijder = scanner.nextLine();
-
-            Gerecht nieuwGerecht = new Gerecht(gerechtNaam);
-
-            ((Avondeten) eetmoment).voegGerechtToe(nieuwGerecht);
-            ((Avondeten) eetmoment).voegBereiderToe(Berijder);
 
             System.out.println(
                     "Gerecht " + gerechtNaam + " toegevoegd aan " + eetmoment.getClass().getSimpleName() + " op "
@@ -194,39 +203,50 @@ public class Main {
         }
 
         else {
+            System.out.println("=========================================");
             System.out.println("Voer de naam van het gerecht in:");
             String gerechtNaam = scanner.nextLine();
-            System.out.println("Voer de ingrediënten in voor het gerecht: " + gerechtNaam);
-            List<Ingredient> ingredienten = new ArrayList<>();
+            System.out.println("=========================================");
+            System.out.println("Voer de ingrediënten in voor het");
+            System.out.println("gerecht:" + gerechtNaam);
             boolean doorgaan = true;
 
+            if (eetmoment instanceof Lunch) {
+                ((Lunch) eetmoment).voegGerechtToe(gerechtNaam);
+            } else if (eetmoment instanceof Ontbijt) {
+                ((Ontbijt) eetmoment).voegGerechtToe(gerechtNaam);
+            } else {
+                System.out.println("Ongeldige eetmoment.");
+                return;
+            }
+
             while (doorgaan) {
-                System.out.println("Voer de naam van een ingrediënt in (of typ stop):");
+                System.out.println("=========================================");
+                System.out.println("Voer de naam van een ingrediënt in ");
+                System.out.println("of typ stop");
                 String ingredientNaam = scanner.nextLine();
                 if (ingredientNaam.equalsIgnoreCase("stop")) {
                     doorgaan = false;
                 } else {
-                    System.out.println("Welke meetwaarde heeft dit Ingredient (Liter , Gram)");
+                    System.out.println("=========================================");
+                    System.out.println("Welke meetwaarde heeft dit Ingredient");
+                    System.out.println("(Liter , Gram)");
                     String meetwaarde = scanner.nextLine();
-                    System.out.println(
-                            "Wat is de hoeveelheid die u nodig heeft van dit Ingredient. In de eerder aangegeven meetwaarde. ");
+                    System.out.println("=========================================");
+                    System.out.println("Wat is de hoeveelheid die u nodig heeft ");
+                    System.out.println("van dit Ingredient. In de eerder ");
+                    System.out.println("aangegeven meetwaarde. ");
                     int hoeveelheid = scanner.nextInt();
                     scanner.nextLine();
 
-                    Ingredient ingredient = new Ingredient(ingredientNaam, hoeveelheid, meetwaarde);
-                    ingredienten.add(ingredient);
+                    if (eetmoment instanceof Ontbijt) {
+                        Gerecht gerecht = ((Ontbijt) eetmoment).getLaatstToegevoegdGerecht();
+                        gerecht.voegIngredientToe(ingredientNaam, hoeveelheid, meetwaarde);
+                    } else if (eetmoment instanceof Lunch) {
+                        Gerecht gerecht = ((Lunch) eetmoment).getLaatstToegevoegdGerecht();
+                        gerecht.voegIngredientToe(ingredientNaam, hoeveelheid, meetwaarde);
+                    }
                 }
-            }
-
-            Gerecht nieuwGerecht = new Gerecht(gerechtNaam);
-
-            if (eetmoment instanceof Lunch) {
-                ((Lunch) eetmoment).voegGerechtToe(nieuwGerecht);
-            } else if (eetmoment instanceof Ontbijt) {
-                ((Ontbijt) eetmoment).voegGerechtToe(nieuwGerecht);
-            } else {
-                System.out.println("Ongeldige eetmoment.");
-                return;
             }
 
             System.out.println(
@@ -235,6 +255,33 @@ public class Main {
 
             menu();
         }
+    }
+
+    private static void bekijkGerechtenPerDag(Dag dag) {
+        System.out.println("Gerechten voor " + dag.name() + ":");
+
+        List<Eetmoment> eetmomenten = dag.getEetmomenten();
+
+        if (eetmomenten.isEmpty()) {
+            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
+            return;
+        }
+
+        for (Eetmoment eetmoment : eetmomenten) {
+            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
+
+            List<Gerecht> gerechten = eetmoment.getGerechten();
+
+            if (!gerechten.isEmpty()) {
+                System.out.println("Gerechten:");
+                for (Gerecht gerecht : gerechten) {
+                    System.out.println("- " + gerecht.getNaam());
+                }
+            } else {
+                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
+            }
+        }
+        menu();
     }
 
     private static void bekijkBoodschappenlijst(Dag dag) {

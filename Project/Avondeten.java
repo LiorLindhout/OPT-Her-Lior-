@@ -1,6 +1,7 @@
 package Project;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Avondeten extends Eetmoment {
     private ArrayList<Gerecht> gerechten;
@@ -8,6 +9,7 @@ public class Avondeten extends Eetmoment {
 
     public Avondeten(String bereider) {
         this.bereider = bereider;
+        this.gerechten = new ArrayList<>();
     }
 
     public String getbereider() {
@@ -27,6 +29,18 @@ public class Avondeten extends Eetmoment {
     @Override
     public void voegBereiderToe(String Bereider) {
         setbereider(bereider);
+    }
+
+    @Override
+    public List<Gerecht> getGerechten() {
+        return gerechten; // Implementatie specifiek voor Ontbijt
+    }
+
+    public Gerecht getLaatstToegevoegdGerecht() {
+        if (gerechten.isEmpty()) {
+            return null;
+        }
+        return gerechten.get(gerechten.size() - 1);
     }
 
 }

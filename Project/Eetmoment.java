@@ -1,6 +1,7 @@
 package Project;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Eetmoment {
     protected ArrayList<Gerecht> gerechten;
@@ -16,6 +17,10 @@ public abstract class Eetmoment {
 
     public void voegBereiderToe(String bereider) {
         this.bereider = bereider;
+    }
+
+    public List<Gerecht> getGerechten() {
+        return gerechten;
     }
 
 }

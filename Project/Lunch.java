@@ -2,8 +2,10 @@ package Project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Lunch extends Eetmoment {
+    static Scanner scanner = new Scanner(System.in);
     private ArrayList<Gerecht> gerechten;
 
     public Lunch() {
@@ -30,6 +32,17 @@ public class Lunch extends Eetmoment {
             return null;
         }
         return gerechten.get(gerechten.size() - 1);
+    }
+
+    @Override
+    public void voegGerechtToeAanEetmoment(Eetmoment eetmoment, Dag dag) {
+        System.out.println("=========================================");
+        System.out.println("Voer de naam van het gerecht in:");
+        String gerechtNaam = scanner.nextLine();
+
+        voegGerechtToe(gerechtNaam);
+
+        Gerecht.IngredientenToevoegen(eetmoment);
     }
 
 }

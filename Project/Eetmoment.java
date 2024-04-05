@@ -15,6 +15,10 @@ public abstract class Eetmoment {
 
     }
 
+    public void voegGerechtToeAanEetmoment(Eetmoment eetmoment, Dag dag) {
+
+    }
+
     public void voegBereiderToe(String bereider) {
         this.bereider = bereider;
     }

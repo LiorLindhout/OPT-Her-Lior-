@@ -78,4 +78,63 @@ public enum Dag {
 
         eetmoment.voegGerechtToeAanEetmoment(eetmoment, dag);
     }
+
+    static void bekijkGerechtenPerDag(Dag dag) {
+        System.out.println("Gerechten voor " + dag.name() + ":");
+
+        List<Eetmoment> eetmomenten = dag.getEetmomenten();
+
+        if (eetmomenten.isEmpty()) {
+            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
+            Main.menu();
+        }
+
+        for (Eetmoment eetmoment : eetmomenten) {
+            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
+
+            List<Gerecht> gerechten = eetmoment.getGerechten();
+
+            if (!gerechten.isEmpty()) {
+                System.out.println("Gerechten:");
+                for (Gerecht gerecht : gerechten) {
+                    System.out.println("- " + gerecht.getNaam());
+                }
+            } else {
+                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
+            }
+        }
+        Main.menu();
+    }
+
+    static void bekijkBoodschappenlijst(Dag dag) {
+        System.out.println("Boodschappenlijst voor " + dag.name() + ":");
+
+        List<Eetmoment> eetmomenten = dag.getEetmomenten();
+
+        if (eetmomenten.isEmpty()) {
+            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
+            Main.menu();
+        }
+
+        for (Eetmoment eetmoment : eetmomenten) {
+            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
+
+            List<Gerecht> gerechten = eetmoment.getGerechten();
+
+            if (!gerechten.isEmpty()) {
+                System.out.println("Ingredienten:");
+                for (Gerecht gerecht : gerechten) {
+                    List<Ingredient> ingredienten = gerecht.getIngredienten();
+                    for (Ingredient ingredient : ingredienten) {
+                        System.out.println("- " + ingredient.getNaam() + " (" + ingredient.getHoeveelheid() + " "
+                                + ingredient.getEenheid() + ")");
+
+                        Main.menu();
+                    }
+                }
+            } else {
+                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
+            }
+        }
+    }
 }

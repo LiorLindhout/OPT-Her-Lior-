@@ -18,6 +18,10 @@ public class Gerecht {
         return naam;
     }
 
+    public List<Ingredient> getIngredienten() {
+        return ingredienten;
+    }
+
     public void setNaam(String naam) {
         this.naam = naam;
     }

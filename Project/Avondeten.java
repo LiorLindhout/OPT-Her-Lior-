@@ -11,7 +11,7 @@ public class Avondeten extends Eetmoment {
 
     public Avondeten(String bereider) {
         this.bereider = bereider;
-        this.gerechten = new ArrayList<>();
+        Avondeten.gerechten = new ArrayList<>();
     }
 
     public String getbereider() {

@@ -1,6 +1,5 @@
 package Project;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -69,7 +68,7 @@ public class Main {
         Dag gekozenDag = Dag.controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
-            bekijkGerechtenPerDag(gekozenDag);
+            Dag.bekijkGerechtenPerDag(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             dag_reserveren_menu();
@@ -80,53 +79,18 @@ public class Main {
         System.out.println("=========================================");
         System.out.println("-----Boodschappen Lijst Bekijken Menu----");
         System.out.println("=========================================");
+        System.out.println("Welke dag wilt u bekijken.");
+        System.out.println("U kunt Kiezen uit ma, di, wo, do, vr, za,");
+        System.out.println("zo, maak uw keuze.");
         String DagInvoer = scanner.nextLine();
         Dag gekozenDag = Dag.controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
-            bekijkBoodschappenlijst(gekozenDag);
+            Dag.bekijkBoodschappenlijst(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             boodsschappen_bekijken_menu();
         }
     }
 
-    // =============================================================================================
-    // =============================================================================================
-    // =============================================================================================
-    // dit moet nog naar een anderen classe worden verplaatst
-    // =============================================================================================
-    // =============================================================================================
-    // =============================================================================================
-
-    private static void bekijkGerechtenPerDag(Dag dag) {
-        System.out.println("Gerechten voor " + dag.name() + ":");
-
-        List<Eetmoment> eetmomenten = dag.getEetmomenten();
-
-        if (eetmomenten.isEmpty()) {
-            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
-            return;
-        }
-
-        for (Eetmoment eetmoment : eetmomenten) {
-            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
-
-            List<Gerecht> gerechten = eetmoment.getGerechten();
-
-            if (!gerechten.isEmpty()) {
-                System.out.println("Gerechten:");
-                for (Gerecht gerecht : gerechten) {
-                    System.out.println("- " + gerecht.getNaam());
-                }
-            } else {
-                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
-            }
-        }
-        Main.menu();
-    }
-
-    private static void bekijkBoodschappenlijst(Dag dag) {
-
-    }
 }

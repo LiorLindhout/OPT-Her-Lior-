@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Avondeten extends Eetmoment {
     static Scanner scanner = new Scanner(System.in);
     private static ArrayList<Gerecht> gerechten;
+    Gerecht gerecht = new Gerecht(getbereider());
     private String bereider;
 
     public Avondeten(String bereider) {
@@ -38,6 +39,7 @@ public class Avondeten extends Eetmoment {
         return gerechten;
     }
 
+    @Override
     public Gerecht getLaatstToegevoegdGerecht() {
         if (gerechten.isEmpty()) {
             return null;
@@ -57,7 +59,7 @@ public class Avondeten extends Eetmoment {
         voegGerechtToe(gerechtNaam);
         voegBereiderToe(bereider);
 
-        Gerecht.IngredientenToevoegen(eetmoment);
+        gerecht.IngredientenToevoegen(eetmoment);
     }
 
 }

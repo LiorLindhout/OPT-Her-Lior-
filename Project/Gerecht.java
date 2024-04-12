@@ -7,11 +7,12 @@ import java.util.Scanner;
 public class Gerecht {
     static Scanner scanner = new Scanner(System.in);
     private String naam;
-    private List<Ingredient> ingredienten;
+    Main main = new Main();
+    private static List<Ingredient> ingredienten;
 
     public Gerecht(String naam) {
         this.naam = naam;
-        this.ingredienten = new ArrayList<>();
+        Gerecht.ingredienten = new ArrayList<>();
     }
 
     public String getNaam() {
@@ -31,7 +32,7 @@ public class Gerecht {
         ingredienten.add(nieuwIngredient);
     }
 
-    public static void IngredientenToevoegen(Eetmoment eetmoment) {
+    public void IngredientenToevoegen(Eetmoment eetmoment) {
         System.out.println("Voer de ingrediënten in voor Uw gerecht");
         boolean doorgaan = true;
 
@@ -54,22 +55,21 @@ public class Gerecht {
                 int hoeveelheid = scanner.nextInt();
                 scanner.nextLine();
 
-                Gerecht gerecht = null;
-                if (eetmoment instanceof Avondeten) {
-                    gerecht = ((Avondeten) eetmoment).getLaatstToegevoegdGerecht();
-                } else if (eetmoment instanceof Ontbijt) {
-                    gerecht = ((Ontbijt) eetmoment).getLaatstToegevoegdGerecht();
-                } else if (eetmoment instanceof Lunch) {
-                    gerecht = ((Lunch) eetmoment).getLaatstToegevoegdGerecht();
-                }
+                Gerecht gerecht = eetmoment.getLaatstToegevoegdGerecht();
 
-                if (gerecht != null) {
-                    gerecht.voegIngredientToe(ingredientNaam, hoeveelheid, meetwaarde);
-                } else {
-                }
+                gerecht.voegIngredientToe(ingredientNaam, hoeveelheid, meetwaarde);
             }
         }
-        Main.menu();
+        main.menu();
+    }
+
+    public void toon() {
+        for (Ingredient ingredient : ingredienten) {
+            System.out.println("- " + ingredient.getNaam() + " (" + ingredient.getHoeveelheid() + " "
+                    + ingredient.getEenheid() + ")");
+            System.out.println("=========================================");
+            main.menu();
+        }
     }
 
 }

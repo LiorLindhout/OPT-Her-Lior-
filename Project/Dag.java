@@ -5,24 +5,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public enum Dag {
-    MAANDAG(new ArrayList<>()),
-    DINSDAG(new ArrayList<>()),
-    WOENSDAG(new ArrayList<>()),
-    DONDERDAG(new ArrayList<>()),
-    VRIJDAG(new ArrayList<>()),
-    ZATERDAG(new ArrayList<>()),
-    ZONDAG(new ArrayList<>());
+    MAANDAG,
+    DINSDAG,
+    WOENSDAG,
+    DONDERDAG,
+    VRIJDAG,
+    ZATERDAG,
+    ZONDAG;
 
     static Scanner scanner = new Scanner(System.in);
 
     private List<Eetmoment> eetmomenten;
 
-    Dag(List<Eetmoment> eetmomenten) {
-        this.eetmomenten = eetmomenten;
-    }
+    Main main = new Main();
 
-    public List<Eetmoment> getEetmomenten() {
-        return eetmomenten;
+    Dag() {
+        this.eetmomenten = new ArrayList<>();
     }
 
     public void voegEetmomentToe(Eetmoment eetmoment) {
@@ -50,7 +48,7 @@ public enum Dag {
         }
     }
 
-    public static void voegEetmomentToeAanDag(Dag dag) {
+    public void voegEetmomentToeAanDag(Dag dag) {
         System.out.println("=========================================");
         System.out.println("Aan welk eetmoment wilt u een gerecht ");
         System.out.println("toevoegen ?");
@@ -79,61 +77,31 @@ public enum Dag {
         eetmoment.voegGerechtToeAanEetmoment(eetmoment, dag);
     }
 
-    static void bekijkGerechtenPerDag(Dag dag) {
+    void bekijkGerechtenPerDag(Dag dag) {
         System.out.println("Gerechten voor " + dag.name() + ":");
-
-        List<Eetmoment> eetmomenten = dag.getEetmomenten();
-
         if (eetmomenten.isEmpty()) {
             System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
-            Main.menu();
-        }
-
-        for (Eetmoment eetmoment : eetmomenten) {
-            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
-
-            List<Gerecht> gerechten = eetmoment.getGerechten();
-
-            if (!gerechten.isEmpty()) {
-                System.out.println("Gerechten:");
-                for (Gerecht gerecht : gerechten) {
-                    System.out.println("- " + gerecht.getNaam());
-                }
-            } else {
-                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
+            System.out.println("=========================================");
+            main.menu();
+        } else {
+            for (Eetmoment eetmoment : eetmomenten) {
+                System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
+                eetmoment.toon();
             }
         }
-        Main.menu();
+        System.out.println("=========================================");
+        main.menu();
     }
 
-    static void bekijkBoodschappenlijst(Dag dag) {
+    void bekijkBoodschappenlijst(Dag dag) {
         System.out.println("Boodschappenlijst voor " + dag.name() + ":");
-
-        List<Eetmoment> eetmomenten = dag.getEetmomenten();
-
         if (eetmomenten.isEmpty()) {
             System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
-            Main.menu();
-        }
-
-        for (Eetmoment eetmoment : eetmomenten) {
-            System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
-
-            List<Gerecht> gerechten = eetmoment.getGerechten();
-
-            if (!gerechten.isEmpty()) {
-                System.out.println("Ingredienten:");
-                for (Gerecht gerecht : gerechten) {
-                    List<Ingredient> ingredienten = gerecht.getIngredienten();
-                    for (Ingredient ingredient : ingredienten) {
-                        System.out.println("- " + ingredient.getNaam() + " (" + ingredient.getHoeveelheid() + " "
-                                + ingredient.getEenheid() + ")");
-
-                        Main.menu();
-                    }
-                }
-            } else {
-                System.out.println("Geen gerechten toegevoegd voor dit eetmoment.");
+            main.menu();
+        } else {
+            for (Eetmoment eetmoment : eetmomenten) {
+                System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
+                eetmoment.toonIngredient();
             }
         }
     }

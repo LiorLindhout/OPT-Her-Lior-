@@ -6,10 +6,10 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        menu();
+        new Main().menu();
     }
 
-    public static void menu() {
+    public void menu() {
         System.out.println("=========================================");
         System.out.println("---------Welkom in Daily Serving---------");
         System.out.println("=========================================");
@@ -22,7 +22,7 @@ public class Main {
         controle_menu(invoer1);
     }
 
-    public static void controle_menu(String invoer1) {
+    public void controle_menu(String invoer1) {
         switch (invoer1) {
             case "1":
                 dag_reserveren_menu();
@@ -31,7 +31,7 @@ public class Main {
                 dag_bekijken_menu();
                 break;
             case "3":
-                boodsschappen_bekijken_menu();
+                boodschappen_bekijken_menu();
                 break;
             default:
                 System.out.println("Ongeldige invoer. Probeer opnieuw.");
@@ -40,7 +40,7 @@ public class Main {
         }
     }
 
-    public static void dag_reserveren_menu() {
+    public void dag_reserveren_menu() {
         System.out.println("=========================================");
         System.out.println("-----------Dag Reserveer Menu------------");
         System.out.println("=========================================");
@@ -50,14 +50,14 @@ public class Main {
         Dag gekozenDag = Dag.controle_dag(dagInvoer);
 
         if (gekozenDag != null) {
-            Dag.voegEetmomentToeAanDag(gekozenDag);
+            gekozenDag.voegEetmomentToeAanDag(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             dag_reserveren_menu();
         }
     }
 
-    public static void dag_bekijken_menu() {
+    public void dag_bekijken_menu() {
         System.out.println("=========================================");
         System.out.println("-------------Dag Bekijk Menu-------------");
         System.out.println("=========================================");
@@ -65,17 +65,18 @@ public class Main {
         System.out.println("U kunt Kiezen uit ma, di, wo, do, vr, za,");
         System.out.println("zo, maak uw keuze.");
         String DagInvoer = scanner.nextLine();
+        System.out.println("=========================================");
         Dag gekozenDag = Dag.controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
-            Dag.bekijkGerechtenPerDag(gekozenDag);
+            gekozenDag.bekijkGerechtenPerDag(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             dag_reserveren_menu();
         }
     }
 
-    public static void boodsschappen_bekijken_menu() {
+    public void boodschappen_bekijken_menu() {
         System.out.println("=========================================");
         System.out.println("-----Boodschappen Lijst Bekijken Menu----");
         System.out.println("=========================================");
@@ -86,10 +87,10 @@ public class Main {
         Dag gekozenDag = Dag.controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
-            Dag.bekijkBoodschappenlijst(gekozenDag);
+            gekozenDag.bekijkBoodschappenlijst(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
-            boodsschappen_bekijken_menu();
+            boodschappen_bekijken_menu();
         }
     }
 

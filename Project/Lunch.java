@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class Lunch extends Eetmoment {
     static Scanner scanner = new Scanner(System.in);
     Gerecht gerecht = new Gerecht(null);
-    private static ArrayList<Gerecht> gerechten;
+    private ArrayList<Gerecht> gerechten;
 
     public Lunch() {
-        Lunch.gerechten = new ArrayList<>();
+        super();
     }
 
     @Override

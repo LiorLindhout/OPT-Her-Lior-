@@ -1,12 +1,60 @@
 package Project;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+    private static List<Dag> dagen = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        voegDagToe(Dag.MAANDAG);
+        voegDagToe(Dag.DINSDAG);
+        voegDagToe(Dag.WOENSDAG);
+        voegDagToe(Dag.DONDERDAG);
+        voegDagToe(Dag.VRIJDAG);
+        voegDagToe(Dag.ZATERDAG);
+        voegDagToe(Dag.ZONDAG);
+
         new Main().menu();
+    }
+
+    // dit is er voor om specefieke dag uit de lijst te halen.
+    public Dag getDag(Dag dag) {
+        for (Dag d : dagen) {
+            if (d == dag) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    // dit is om de hele lijst met dagen op te halen.
+    public static List<Dag> getDagen() {
+        return dagen;
+    }
+
+    public Dag controle_dag(String invoer) {
+        switch (invoer.toLowerCase()) {
+            case "ma":
+                return getDag(Dag.MAANDAG);
+            case "di":
+                return getDag(Dag.DINSDAG);
+            case "wo":
+                return getDag(Dag.WOENSDAG);
+            case "do":
+                return getDag(Dag.DONDERDAG);
+            case "vr":
+                return getDag(Dag.VRIJDAG);
+            case "za":
+                return getDag(Dag.ZATERDAG);
+            case "zo":
+                return getDag(Dag.ZONDAG);
+            default:
+                return null;
+        }
     }
 
     public void menu() {
@@ -44,10 +92,10 @@ public class Main {
         System.out.println("=========================================");
         System.out.println("-----------Dag Reserveer Menu------------");
         System.out.println("=========================================");
-        System.out.println("Welke dag wilt u reserveren.");
-        System.out.println("U kunt Kiezen uit ma, di, wo, do, vr, za, zo, maak uw keuze.");
+        System.out.println("Welke dag wilt u bekijken?");
+        System.out.println("Ma, Di, Wo, Do, Vr, Za, Zo");
         String dagInvoer = scanner.nextLine();
-        Dag gekozenDag = Dag.controle_dag(dagInvoer);
+        Dag gekozenDag = controle_dag(dagInvoer);
 
         if (gekozenDag != null) {
             gekozenDag.voegEetmomentToeAanDag(gekozenDag);
@@ -61,18 +109,17 @@ public class Main {
         System.out.println("=========================================");
         System.out.println("-------------Dag Bekijk Menu-------------");
         System.out.println("=========================================");
-        System.out.println("Welke dag wilt u bekijken.");
-        System.out.println("U kunt Kiezen uit ma, di, wo, do, vr, za,");
-        System.out.println("zo, maak uw keuze.");
+        System.out.println("Welke dag wilt u bekijken?");
+        System.out.println("Ma, Di, Wo, Do, Vr, Za, Zo");
         String DagInvoer = scanner.nextLine();
         System.out.println("=========================================");
-        Dag gekozenDag = Dag.controle_dag(DagInvoer);
+        Dag gekozenDag = controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
             gekozenDag.bekijkGerechtenPerDag(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
-            dag_reserveren_menu();
+            dag_bekijken_menu();
         }
     }
 
@@ -80,17 +127,24 @@ public class Main {
         System.out.println("=========================================");
         System.out.println("-----Boodschappen Lijst Bekijken Menu----");
         System.out.println("=========================================");
-        System.out.println("Welke dag wilt u bekijken.");
-        System.out.println("U kunt Kiezen uit ma, di, wo, do, vr, za,");
-        System.out.println("zo, maak uw keuze.");
+        System.out.println("Welke dag wilt u bekijken?");
+        System.out.println("Ma, Di, Wo, Do, Vr, Za, Zo");
         String DagInvoer = scanner.nextLine();
-        Dag gekozenDag = Dag.controle_dag(DagInvoer);
+        Dag gekozenDag = controle_dag(DagInvoer);
 
         if (gekozenDag != null) {
             gekozenDag.bekijkBoodschappenlijst(gekozenDag);
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             boodschappen_bekijken_menu();
+        }
+    }
+
+    public static void voegDagToe(Dag dag) {
+        if (!dagen.contains(dag)) {
+            dagen.add(dag);
+        } else {
+            System.out.println("Deze dag is al toegevoegd.");
         }
     }
 

@@ -64,12 +64,14 @@ public class Gerecht {
     }
 
     public void toon() {
-        for (Ingredient ingredient : ingredienten) {
-            System.out.println("- " + ingredient.getNaam() + " (" + ingredient.getHoeveelheid() + " "
-                    + ingredient.getEenheid() + ")");
-            System.out.println("=========================================");
-            main.menu();
+        if (ingredienten != null && !ingredienten.isEmpty()) {
+            System.out.println("Ingrediënten:");
+            for (Ingredient ingredient : ingredienten) {
+                System.out.println("- " + ingredient.getNaam() + " (" + ingredient.getHoeveelheid() + " "
+                        + ingredient.getEenheid() + ")");
+            }
+        } else {
+            System.out.println("Geen ingrediënten toegevoegd voor dit gerecht.");
         }
     }
-
 }

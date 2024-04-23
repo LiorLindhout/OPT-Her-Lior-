@@ -27,27 +27,6 @@ public enum Dag {
         eetmomenten.add(eetmoment);
     }
 
-    public static Dag controle_dag(String invoer) {
-        switch (invoer.toLowerCase()) {
-            case "ma":
-                return Dag.MAANDAG;
-            case "di":
-                return Dag.DINSDAG;
-            case "wo":
-                return Dag.WOENSDAG;
-            case "do":
-                return Dag.DONDERDAG;
-            case "vr":
-                return Dag.VRIJDAG;
-            case "za":
-                return Dag.ZATERDAG;
-            case "zo":
-                return Dag.ZONDAG;
-            default:
-                return null;
-        }
-    }
-
     public void voegEetmomentToeAanDag(Dag dag) {
         System.out.println("=========================================");
         System.out.println("Aan welk eetmoment wilt u een gerecht ");
@@ -73,16 +52,16 @@ public enum Dag {
                 voegEetmomentToeAanDag(dag);
                 return;
         }
+        dag.voegEetmomentToe(eetmoment);
 
         eetmoment.voegGerechtToeAanEetmoment(eetmoment, dag);
     }
 
     void bekijkGerechtenPerDag(Dag dag) {
-        System.out.println("Gerechten voor " + dag.name() + ":");
+        Dag huidigeDag = main.getDag(dag);
+        System.out.println("Gerechten voor " + huidigeDag.name() + ":");
         if (eetmomenten.isEmpty()) {
-            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
-            System.out.println("=========================================");
-            main.menu();
+            System.out.println("Geen eetmomenten toegevoegd voor " + huidigeDag.name());
         } else {
             for (Eetmoment eetmoment : eetmomenten) {
                 System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
@@ -94,15 +73,16 @@ public enum Dag {
     }
 
     void bekijkBoodschappenlijst(Dag dag) {
-        System.out.println("Boodschappenlijst voor " + dag.name() + ":");
+        Dag huidigeDag = main.getDag(dag);
+        System.out.println("Boodschappenlijst voor " + huidigeDag.name() + ":");
         if (eetmomenten.isEmpty()) {
-            System.out.println("Geen eetmomenten toegevoegd voor " + dag.name());
-            main.menu();
+            System.out.println("Geen eetmomenten toegevoegd voor " + huidigeDag.name());
         } else {
             for (Eetmoment eetmoment : eetmomenten) {
                 System.out.println("Eetmoment: " + eetmoment.getClass().getSimpleName());
                 eetmoment.toonIngredient();
             }
         }
+        main.menu();
     }
 }

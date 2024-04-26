@@ -14,12 +14,6 @@ public class Lunch extends Eetmoment {
     }
 
     @Override
-    public void voegGerechtToe(String gerechtNaam) {
-        Gerecht nieuwGerecht = new Gerecht(gerechtNaam);
-        gerechten.add(nieuwGerecht);
-    }
-
-    @Override
     public void voegBereiderToe(String Bereider) {
     }
 
@@ -29,22 +23,20 @@ public class Lunch extends Eetmoment {
     }
 
     @Override
-    public Gerecht getLaatstToegevoegdGerecht() {
-        if (gerechten.isEmpty()) {
-            return null;
-        }
-        return gerechten.get(gerechten.size() - 1);
-    }
-
-    @Override
-    public void voegGerechtToeAanEetmoment(Eetmoment eetmoment, Dag dag) {
+    public void voegGerechtToeAanEetmoment(Eetmoment eetmoment) {
         System.out.println("=========================================");
         System.out.println("Voer de naam van het gerecht in:");
         String gerechtNaam = scanner.nextLine();
 
-        voegGerechtToe(gerechtNaam);
+        Gerecht gerecht = new Gerecht(gerechtNaam);
+        voegGerechtToe(gerecht);
 
         gerecht.IngredientenToevoegen(eetmoment);
+    }
+
+    @Override
+    public void voegGerechtToe(Gerecht gerecht) {
+        super.voegGerechtToe(gerecht);
     }
 
 }

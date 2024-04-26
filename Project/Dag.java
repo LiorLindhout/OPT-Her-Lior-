@@ -27,7 +27,7 @@ public enum Dag {
         eetmomenten.add(eetmoment);
     }
 
-    public void voegEetmomentToeAanDag(Dag dag) {
+    public void voegEetmomentToeAanDag() {
         System.out.println("=========================================");
         System.out.println("Aan welk eetmoment wilt u een gerecht ");
         System.out.println("toevoegen ?");
@@ -49,12 +49,12 @@ public enum Dag {
                 break;
             default:
                 System.out.println("Ongeldige invoer voor eetmoment. Probeer opnieuw.");
-                voegEetmomentToeAanDag(dag);
+                voegEetmomentToeAanDag();
                 return;
         }
-        dag.voegEetmomentToe(eetmoment);
+        voegEetmomentToe(eetmoment);
 
-        eetmoment.voegGerechtToeAanEetmoment(eetmoment, dag);
+        eetmoment.voegGerechtToeAanEetmoment(eetmoment);
     }
 
     void bekijkGerechtenPerDag(Dag dag) {

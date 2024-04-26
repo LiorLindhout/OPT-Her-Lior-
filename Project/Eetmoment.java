@@ -38,12 +38,11 @@ public abstract class Eetmoment {
         }
     }
 
-    public void voegGerechtToe(String gerechtNaam) {
-
+    public void voegGerechtToe(Gerecht gerecht) {
+        gerechten.add(gerecht);
     }
 
-    public void voegGerechtToeAanEetmoment(Eetmoment eetmoment, Dag dag) {
-    }
+    public abstract void voegGerechtToeAanEetmoment(Eetmoment eetmoment);
 
     public void voegBereiderToe(String bereider) {
         this.bereider = bereider;
@@ -53,6 +52,11 @@ public abstract class Eetmoment {
         return gerechten;
     }
 
-    public abstract Gerecht getLaatstToegevoegdGerecht();
+    public Gerecht getLaatstToegevoegdGerecht() {
+        if (gerechten.isEmpty()) {
+            return null;
+        }
+        return gerechten.get(gerechten.size() - 1);
+    }
 
 }

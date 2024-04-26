@@ -98,7 +98,7 @@ public class Main {
         Dag gekozenDag = controle_dag(dagInvoer);
 
         if (gekozenDag != null) {
-            gekozenDag.voegEetmomentToeAanDag(gekozenDag);
+            gekozenDag.voegEetmomentToeAanDag();
         } else {
             System.out.println("Ongeldige dag. Probeer opnieuw.");
             dag_reserveren_menu();
